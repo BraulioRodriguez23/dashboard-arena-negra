@@ -8,10 +8,17 @@ export default function Topbar() {
         <div></div>
 
         {/* LOGO */}
-        <Link
-          href="/"
-          className="flex items-center scale-150 hover:scale-100 transition-transform"
-        >
+       <Link
+  href="/"
+  className="
+    hidden md:flex
+    items-center
+    scale-150
+    hover:scale-100
+    transition-transform
+  "
+>
+
           <img
             src="/AND_Blanco.png"
             alt="Arena Negra Logo"

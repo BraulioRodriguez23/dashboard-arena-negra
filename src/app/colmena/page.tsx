@@ -1,16 +1,11 @@
 // app/colmena/page.tsx
-'use client';
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import FeatureSplit from "./components/FeatureSplit";
 import FeatureCard from "./components/FeatureCard";
 
-import {
-  ChartLineUp,
-  Buildings,
-  Wrench,
-  UsersThree
-} from "phosphor-react";
+import { ChartLineUp, Buildings, Wrench, UsersThree } from "phosphor-react";
 
 const CARACTERISTICAS = [
   {
@@ -36,7 +31,7 @@ const CARACTERISTICAS = [
     text: "Gestiona contratos, pagos y evaluaciones de tu equipo de trabajo.",
     icon: UsersThree,
     color: "bg-arena text-purple-600",
-  }
+  },
 ];
 
 export default function ColmenaPage() {
@@ -49,7 +44,6 @@ export default function ColmenaPage() {
 
         <div className="relative z-10 max-w-7xl mx-auto px-6">
           <div className="grid gap-12 md:gap-16 items-center grid-cols-1 md:grid-cols-2">
-            
             {/* BLOQUE DE TEXTO: Prioridad 1 en móvil */}
             <div className="order-1 md:order-1 text-center md:text-left">
               <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold leading-[1.1] tracking-tight text-white">
@@ -57,9 +51,10 @@ export default function ColmenaPage() {
                 <span className="text-[#F9F72F] block mt-2">sin fricción.</span>
               </h1>
               <p className="mt-6 md:mt-8 text-lg md:text-xl text-zinc-400 max-w-xl mx-auto md:mx-0 leading-relaxed">
-                Colmena centraliza pagos, comunicación y la operación diaria para que gestionar tu comunidad deje de ser un problema manual.
+                Colmena centraliza pagos, comunicación y la operación diaria
+                para que gestionar tu comunidad deje de ser un problema manual.
               </p>
-              
+
               <div className="mt-8 md:mt-10 flex flex-col sm:flex-row justify-center md:justify-start gap-4 md:gap-5">
                 <Link
                   href="/contacto"
@@ -83,9 +78,13 @@ export default function ColmenaPage() {
                   src="/sona_seleccion1.png"
                   alt="Dashboard Principal de Colmena"
                   fill
-                  className="object-cover object-top" 
-                  priority
-                  quality={100}
+                  quality={90}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="
+    object-cover
+    object-center
+    md:object-top
+  "
                 />
               </div>
             </div>
@@ -94,11 +93,13 @@ export default function ColmenaPage() {
       </section>
 
       {/* 2. SECCIÓN BENEFICIOS - ESTRUCTURADOS Y CLAROS */}
-      <section className="py-20 bg-[#262626]"> {/* Fondo blanco para contrastar con el Hero oscuro */}
+      <section className="py-20 bg-[#262626]">
+        {" "}
+        {/* Fondo blanco para contrastar con el Hero oscuro */}
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ">
             {CARACTERISTICAS.map((card, index) => (
-              <FeatureCard 
+              <FeatureCard
                 key={index}
                 title={card.title}
                 text={card.text}
@@ -138,7 +139,8 @@ export default function ColmenaPage() {
             Administra mejor. Vive más tranquilo.
           </h2>
           <p className="text-[#F9F72F] text-xl md:text-2xl font-light mb-8 md:mb-12 leading-relaxed">
-            Mejora la calidad de vida de tu comunidad con automatización inteligente.
+            Mejora la calidad de vida de tu comunidad con automatización
+            inteligente.
           </p>
           <Link
             href="/contacto"
