@@ -126,7 +126,7 @@ export default function ColmenaPage() {
           <FeatureSplit
             title="Reportes detallados"
             description="Genera estados financieros con transparencia total para los condóminos, optimizando la gestión de recursos."
-            imageSrc="/Estados_financieros.png"
+            imageSrc="/estados_financieros.png"
           />
         </div>
       </section>
