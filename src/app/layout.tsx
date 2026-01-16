@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+import { Providers } from "./providers"; // 👈 Importamos el nuevo provider
 import Topbar from "./components/topbar";
-import Footer from "./components/footer"; // 👈 FALTA ESTO
+import Footer from "./components/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
   title: "Colmena Landing",
   description: "Landing page oficial de Colmena",
   icons: {
-    icon:"/icono.png",
+    icon: "/icono.png",
   },
 };
 
@@ -29,13 +30,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es">
+    // suppressHydrationWarning es obligatorio para next-themes
+    <html lang="es" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Topbar />
-        {children}
-        <Footer /> {/* 👈 AQUÍ */}
+        <Providers>
+          <Topbar />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

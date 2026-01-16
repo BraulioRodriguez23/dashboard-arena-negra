@@ -1,153 +1,114 @@
-// app/colmena/page.tsx
-"use client";
-import Link from "next/link";
-import Image from "next/image";
-import FeatureSplit from "./components/FeatureSplit";
-import FeatureCard from "./components/FeatureCard";
+'use client';
 
+import React from 'react';
 import { ChartLineUp, Buildings, Wrench, UsersThree } from "phosphor-react";
+import FeatureCard from "./components/FeatureCard";
+import ColmenaExperience from "./components/ColmenaExperience";
 
 const CARACTERISTICAS = [
-  {
-    title: "Dashboard con KPIs",
-    text: "Visualiza métricas clave y alertas importantes en un solo panel intuitivo.",
-    icon: ChartLineUp,
-    color: "bg-arena text-emerald-600",
+  { 
+    title: "Dashboard con KPIs", 
+    text: "Visualiza métricas clave y alertas importantes en un solo panel intuitivo.", 
+    icon: ChartLineUp 
   },
-  {
-    title: "Gestión de Unidades",
-    text: "Administra información de residentes y propietarios de forma centralizada.",
-    icon: Buildings,
-    color: "bg-arena text-blue-600",
+  { 
+    title: "Gestión de Unidades", 
+    text: "Administra información de residentes y propietarios de forma centralizada.", 
+    icon: Buildings 
   },
-  {
-    title: "Control de Mantenimiento",
-    text: "Programa y gestiona todas las tareas preventivas y correctivas.",
-    icon: Wrench,
-    color: "bg-arena text-orange-600",
+  { 
+    title: "Control de Mantenimiento", 
+    text: "Programa y gestiona todas las tareas preventivas y correctivas.", 
+    icon: Wrench 
   },
-  {
-    title: "Personal y Proveedores",
-    text: "Gestiona contratos, pagos y evaluaciones de tu equipo de trabajo.",
-    icon: UsersThree,
-    color: "bg-arena text-purple-600",
+  { 
+    title: "Personal y Proveedores", 
+    text: "Gestiona contratos, pagos y evaluaciones de tu equipo de trabajo.", 
+    icon: UsersThree 
   },
 ];
 
 export default function ColmenaPage() {
   return (
-    <main className="bg-[#262626] text-[#F7F6F4]">
-      {/* 1. HERO SECTION - DISEÑO DE ALTO IMPACTO */}
-      <section className="relative pt-16 pb-12 md:pt-32 md:pb-40 overflow-hidden">
-        {/* Gradiente ambiental sutil */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(249,247,47,0.05),transparent_60%)]" />
+    <main className="bg-background w-full overflow-x-hidden transition-colors duration-500 selection:bg-dev/30">
+      
+      {/* 1. HERO SECTION */}
+      <section className="relative min-h-screen flex items-center pt-24 pb-12 md:pt-20 px-0 sm:px-6 overflow-hidden">
+        
+        {/* Glow dinámico de fondo */}
+        <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden">
+          <div className="absolute w-[120%] md:w-[80%] h-[40%] bg-dev/10 dark:bg-vista/20 blur-[80px] md:blur-[120px] transition-colors duration-700 opacity-60" />
+        </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6">
-          <div className="grid gap-12 md:gap-16 items-center grid-cols-1 md:grid-cols-2">
-            {/* BLOQUE DE TEXTO: Prioridad 1 en móvil */}
-            <div className="order-1 md:order-1 text-center md:text-left">
-              <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold leading-[1.1] tracking-tight text-white">
-                Administración de condominios,
-                <span className="text-[#F9F72F] block mt-2">sin fricción.</span>
-              </h1>
-              <p className="mt-6 md:mt-8 text-lg md:text-xl text-zinc-400 max-w-xl mx-auto md:mx-0 leading-relaxed">
-                Colmena centraliza pagos, comunicación y la operación diaria
-                para que gestionar tu comunidad deje de ser un problema manual.
-              </p>
-
-              <div className="mt-8 md:mt-10 flex flex-col sm:flex-row justify-center md:justify-start gap-4 md:gap-5">
-                <Link
-                  href="/contacto"
-                  className="px-8 md:px-10 py-3 md:py-4 rounded-full bg-[#F9F72F] text-[#262626] font-bold hover:shadow-[0_0_30px_rgba(249,247,47,0.4)] transition-all active:scale-95 text-base md:text-lg"
-                >
-                  Solicitar demo
-                </Link>
-                <a
-                  href="#beneficios"
-                  className="px-8 md:px-10 py-3 md:py-4 rounded-full border border-zinc-700 text-zinc-300 hover:bg-white/5 transition-colors text-base md:text-lg text-center"
-                >
-                  Ver beneficios
-                </a>
-              </div>
+        <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
+          
+          {/* IMAGEN HERO: 
+              Móvil: aspect-auto para ver captura completa sin zoom.
+              Desktop: aspect-square con object-cover para look premium.
+          */}
+          <div className="order-1 lg:order-2 w-full lg:w-full animate-in fade-in zoom-in-95 duration-1000">
+            <div className="relative rounded-none sm:rounded-[2.5rem] bg-card/50 border-y sm:border border-card-border shadow-2xl overflow-hidden aspect-auto md:aspect-square group">
+              <img
+                src="/sona_seleccion1.png"
+                alt="Preview Colmena"
+                className="w-full h-auto md:h-full object-contain md:object-cover md:object-top transition-transform duration-700 group-hover:scale-105"
+              />
             </div>
+          </div>
 
-            {/* IMAGEN: Grande y desbordada en PC, centrada en móvil */}
-            <div className="order-2 md:order-2 relative w-full flex justify-center md:block">
-              <div className="relative h-[350px] md:h-[600px] w-full md:w-[80%] lg:w-[80%] md:-mr-[40%] rounded-[2.5rem] bg-[#1E1E20] border border-white/10 shadow-[0_40px_100px_rgba(0,0,0,0.6)] overflow-hidden">
-                <Image
-                  src="/sona_seleccion1.png"
-                  alt="Dashboard Principal de Colmena"
-                  fill
-                  quality={90}
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="
-    object-cover
-    object-center
-    md:object-top
-  "
-                />
-              </div>
+          {/* TEXTO HERO */}
+          <div className="order-2 lg:order-1 text-center lg:text-left px-6 sm:px-0">
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-black text-foreground tracking-tighter leading-[0.95] md:leading-[0.9]">
+              Administración <br />
+              <span className="text-dev dark:text-vista italic transition-colors duration-500">
+                sin fricción.
+              </span>
+            </h1>
+
+            <p className="mt-6 md:mt-8 text-muted text-sm md:text-xl max-w-prose mb-8 font-medium leading-relaxed mx-auto lg:mx-0">
+              Colmena centraliza pagos, comunicación y la operación diaria para que gestionar tu comunidad sea un flujo natural.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <a 
+                href="/contacto" 
+                className="px-10 py-4 font-black rounded-full shadow-xl bg-dev text-black dark:bg-vista dark:text-white shadow-dev/20 dark:shadow-vista/20 uppercase tracking-widest text-[10px] md:text-xs transition-all hover:scale-105 active:scale-95"
+              >
+                Solicitar demo
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. SECCIÓN BENEFICIOS - ESTRUCTURADOS Y CLAROS */}
-      <section className="py-20 bg-[#262626]">
-        {" "}
-        {/* Fondo blanco para contrastar con el Hero oscuro */}
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ">
+      {/* 2. SECCIÓN DE BENEFICIOS */}
+      <section id="beneficios" className="py-16 md:py-24 bg-background px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {CARACTERISTICAS.map((card, index) => (
-              <FeatureCard
-                key={index}
-                title={card.title}
-                text={card.text}
-                icon={card.icon}
-              />
+              <FeatureCard key={index} {...card} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* 3. SECCIÓN PREVIEW (Features) - INTERFACES INTUITIVAS */}
-      <section className="py-16 md:py-24 border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-6 space-y-16 md:space-y-32">
-          <FeatureSplit
-            title="Panel de administración intuitivo"
-            description="Gestiona todas las áreas de tu condominio desde un solo lugar con una interfaz diseñada para ser entendida en segundos."
-            imageSrc="/dashboard.png"
-          />
-          <FeatureSplit
-            title="Comunicación efectiva"
-            description="Mantén a los residentes informados con notificaciones instantáneas y avisos generales, facilitando la convivencia diaria."
-            imageSrc="/comunicacion.png"
-            reverse
-          />
-          <FeatureSplit
-            title="Reportes detallados"
-            description="Genera estados financieros con transparencia total para los condóminos, optimizando la gestión de recursos."
-            imageSrc="/estados_financieros.png"
-          />
-        </div>
-      </section>
+      {/* 3. EXPERIENCIA COLMENA */}
+      <div className="w-full">
+        <ColmenaExperience />
+      </div>
 
-      {/* 4. CTA FINAL - CIERRE CONFIABLE */}
-      <section className="py-20 md:py-32 bg-gradient-to-b from-transparent to-[#1a1a1a] text-center border-t border-white/5">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 md:mb-8 text-white leading-tight">
-            Administra mejor. Vive más tranquilo.
+      {/* 4. CTA FINAL */}
+      <section className="py-20 md:py-32 bg-background border-t border-card-border text-center px-6">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-7xl font-black text-foreground mb-8 tracking-tighter leading-[1.0]">
+            Administra mejor. <br /> Vive tranquilo.
           </h2>
-          <p className="text-[#F9F72F] text-xl md:text-2xl font-light mb-8 md:mb-12 leading-relaxed">
-            Mejora la calidad de vida de tu comunidad con automatización
-            inteligente.
-          </p>
-          <Link
-            href="/contacto"
-            className="w-full sm:w-auto inline-block px-12 py-4 md:py-5 rounded-full bg-[#F9F72F] text-[#262626] font-black text-base md:text-lg hover:scale-105 transition-transform shadow-xl"
+          <a 
+            href="/contacto" 
+            className="inline-block px-10 py-4 md:px-12 md:py-5 rounded-full font-black text-sm md:text-lg bg-dev text-black dark:bg-vista dark:text-white shadow-dev/20 dark:shadow-vista/20 transition-all hover:scale-105 active:scale-95"
           >
             Solicitar demo gratuita
-          </Link>
+          </a>
         </div>
       </section>
     </main>

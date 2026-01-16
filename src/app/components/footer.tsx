@@ -1,50 +1,53 @@
+'use client';
+
 import Link from "next/link";
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="bg-[#1F1F1F] text-[#F7F6F4]/80 border-t border-white/5">
+    // CAMBIO: bg-background y text-muted para adaptabilidad total
+    <footer className="bg-background text-muted border-t border-card-border transition-colors duration-500">
       <div className="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-12">
 
         {/* Brand */}
         <div>
-          <h3 className="text-xl font-bold text-[#F9F72F] mb-4">
+          {/* CAMBIO: text-dev (Miel) para el nombre de marca */}
+          <h3 className="text-xl font-bold text-dev mb-4">
             Colmena
           </h3>
           <p className="text-sm leading-relaxed">
-            Software que reduce fricción, automatiza lo importante
+            Software que reduce fricción, automatiza lo importante 
             y te devuelve tiempo.
           </p>
         </div>
-         <br />
+        
+        {/* Espaciador decorativo opcional */}
+        <div className="hidden md:block" />
 
         {/* Navegación */}
         <div>
-          <h4 className="font-semibold mb-4 text-white">
+          {/* CAMBIO: text-foreground para encabezados */}
+          <h4 className="font-semibold mb-4 text-foreground">
             Producto
           </h4>
           <ul className="space-y-2 text-sm">
-            <li><Link href="/colmena" className="hover:text-white">Colmena</Link></li>
-            <li><Link href="/demo" className="hover:text-white">Solicitar demo</Link></li>
-            <li><Link href="/contacto" className="hover:text-white">Contacto</Link></li>
+            <li>
+              <Link href="/colmena" className="hover:text-dev transition-colors">
+                Colmena
+              </Link>
+            </li>
+            <li>
+              <Link href="/contacto" className="hover:text-dev transition-colors">
+                Solicitar demo
+              </Link>
+            </li>
           </ul>
         </div>
-         
-
-        {/* Empresa */}
-        {/* <div>
-          <h4 className="font-semibold mb-4 text-white">
-            Empresa
-          </h4>
-          <ul className="space-y-2 text-sm">
-            <li><Link href="/about" className="hover:text-white">Nosotros</Link></li>
-            <li><Link href="/privacidad" className="hover:text-white">Privacidad</Link></li>
-            <li><Link href="/terminos" className="hover:text-white">Términos</Link></li>
-          </ul>
-        </div> */}
 
         {/* Contacto */}
         <div>
-          <h4 className="font-semibold mb-4 text-white">
+          <h4 className="font-semibold mb-4 text-foreground">
             Contacto
           </h4>
           <ul className="space-y-2 text-sm">
@@ -52,7 +55,7 @@ export default function Footer() {
             <li>
               <a
                 href="mailto:arenanegradevelop@gmail.com"
-                className="hover:text-white"
+                className="hover:text-dev transition-colors"
               >
                 arenanegradevelop@gmail.com
               </a>
@@ -63,8 +66,9 @@ export default function Footer() {
       </div>
 
       {/* Bottom */}
-      <div className="border-t border-white/5 py-6 text-center text-xs text-[#F7F6F4]/50">
-        © {new Date().getFullYear()} Colmena. Todos los derechos reservados.
+      {/* CAMBIO: Borde dinámico y texto muted suave */}
+      <div className="border-t border-card-border py-6 text-center text-xs text-muted/50">
+        © {currentYear} Colmena. Todos los derechos reservados.
       </div>
     </footer>
   );

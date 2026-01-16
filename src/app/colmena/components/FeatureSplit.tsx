@@ -2,50 +2,53 @@
 import Image from "next/image";
 
 interface FeatureSplitProps {
-  title: string; // Corregido: 'title' en lugar de 'tittle'
+  title: string;
   description: string;
-  imageSrc?: string;
+  imageSrc: string;
   reverse?: boolean;
 }
 
-export default function FeatureSplit({
-  title,
-  description,
-  imageSrc,
-  reverse = false,
-}: FeatureSplitProps) {
+export default function FeatureSplit({ title, description, imageSrc, reverse = false }: FeatureSplitProps) {
   return (
-    <article
-      className={`grid gap-12 items-center py-12 ${
-        reverse ? "md:grid-cols-2 md:grid-flow-dense" : "md:grid-cols-2"
-      }`}
-    >
-      {/* Contenedor de Imagen con Relación de Aspecto Controlada */}
-      <div className="relative w-full h-[420px] md:h-[550px] rounded-2xl bg-[#1A1A1A] border border-white/5 shadow-2xl overflow-hidden group">
-  {imageSrc ? (
-    <Image
-      src={imageSrc}
-      alt={`Interfaz de ${title}`}
-      fill
-      sizes="(max-width: 768px) 100vw, 50vw"
-      className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
-      priority
-      quality={95}
-    />
-  ) : (
-    <div className="flex items-center justify-center h-full bg-zinc-900 text-zinc-600">
-      <span>Vista previa próximamente</span>
-    </div>
-  )}
-</div>
-
-      {/* Bloque de Texto */}
-      <div className={reverse ? "md:pl-10" : "md:pr-10"}>
-        <h3 className="text-3xl md:text-4xl font-bold text-[#F9F72F] mb-6 leading-tight">
-          {title}
+    <article className={`flex flex-col ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-20 py-16 transition-colors duration-500`}>
+      
+      {/* BLOQUE DE TEXTO */}
+      <div className="w-full md:w-1/2 text-left">
+        {/* CAMBIO: text-foreground */}
+        <h3 className="text-3xl md:text-5xl font-light text-foreground mb-6 tracking-tighter leading-tight">
+          {title}<span className="text-dev">.</span>
         </h3>
-        <p className="text-zinc-400 text-lg leading-relaxed">
+        {/* CAMBIO: text-muted */}
+        <p className="text-muted text-lg md:text-xl font-light leading-relaxed max-w-prose">
           {description}
+        </p>
+      </div>
+
+      {/* CONTENEDOR DE IMAGEN CON SCROLL INTERNO */}
+      <div className="w-full md:w-1/2">
+        {/* CAMBIO: border-card-border y bg-card */}
+        <div className="relative w-full h-[450px] md:h-[600px] overflow-y-auto scrollbar-hide rounded-[2rem] border border-card-border bg-card shadow-2xl group">
+          
+          <div className="w-full min-h-[140vh] md:min-h-[220vh] relative">
+            <Image 
+              src={imageSrc} 
+              alt={title} 
+              width={1200}
+              height={2400}
+              priority
+              className="w-full h-auto object-cover object-top block"
+            />
+            
+            {/* Overlay sutil al final: ahora usa un degradado dinámico hacia bg-card */}
+            <div className="absolute bottom-0 w-full h-32 bg-gradient-to-t from-card to-transparent flex items-end justify-center pb-8 opacity-0 group-hover:opacity-100 transition-opacity">
+               <span className="text-dev text-[10px] uppercase tracking-[0.3em]">Fin del módulo</span>
+            </div>
+          </div>
+          
+        </div>
+        {/* Indicador de scroll - text-muted con opacidad baja */}
+        <p className="text-muted/50 text-[10px] uppercase tracking-widest mt-4 text-center md:text-left">
+            ← Deslice dentro del recuadro para ver más →
         </p>
       </div>
     </article>

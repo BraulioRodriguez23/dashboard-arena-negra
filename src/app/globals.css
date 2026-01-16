@@ -1,75 +1,130 @@
 @import "tailwindcss";
 
-/* 1. Definimos las variables semánticas usando los colores de la paleta */
 :root {
-  /* Usamos el color 'Ligero' para el fondo claro */
-  --background: #F7F6FA; 
-  /* Usamos el color 'Arena' para el texto oscuro */
-  --foreground: #262626; 
-  --bg-dark: #262626;
-  --text-light: #F7F6F4;
+  --background: #F1F0ED;      
+  --foreground: #000C26;      
+  --muted: #4A5568;
+  --card: #FFFFFF;
+  --card-border: rgba(0, 12, 38, 0.08);
+  
+  /* Colores de marca */
+  --dev: #F9CA46;
+  --vista: #7CA7EB;
 }
 
-/* 2. Aquí registramos todos los colores de tu imagen para usarlos en Tailwind */
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-
-  /* -- TUS COLORES PERSONALIZADOS -- */
-  --color-ligero: #F7F6FA;
-  --color-arena: #262626;
-  --color-dev: #F9FF2F;
-  --color-plumb: #3E3755;
-  --color-emerald: #233030;
-  --color-terra: #592E2B;
-}
-.bg-grain {
-  position: relative;
-  background-color: #1a1a1a;
+.dark {
+  --background: #272625;      
+  --foreground: #F1F0ED;      
+  --card: #1F1E1D;            
+  --card-border: rgba(249, 202, 70, 0.08); 
+  --muted: #A1A1AA;
 }
 
-.bg-grain::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.50; /* ajusta intensisdad */
-  background-size: cover;
-  mix-blend-mode: overlay;
-
-  background-image: url("data:image/svg+xml;utf8,\
-  <svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'>\
-    <filter id='noise'>\
-      <feTurbulence type='fractalNoise' baseFrequency='1.8' numOctaves='8'/>\
-    </filter>\
-    <rect width='100%' height='100%' filter='url(%23noise)'/>\
-  </svg>");
-}
-
-
-@media (prefers-color-scheme: dark) {
+@layer components {
   :root {
-    /* MODO OSCURO: Invertimos a Arena (fondo) y Ligero (texto) */
-    --background: #262626;
-    --foreground: #F7F6FA;
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-border: var(--card-border);
+    --color-muted: var(--muted);
+  }
+
+  .dark {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-border: var(--card-border);
+    --color-muted: var(--muted);
   }
 }
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE y Edge */
+    scrollbar-width: none;    /* Firefox */
+  }
 }
-.image-wrapper {
-  width: 100%;
-  height: 500px; /* aquí decides qué tan “larga” quieres la imagen */
-  overflow: hidden;
+/* Clases personalizadas que SÍ funcionan */
+.bg-dev {
+  background-color: var(--dev) !important;
 }
 
-.image-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* CLAVE */
+.bg-vista {
+  background-color: var(--vista) !important;
+}
+
+.text-dev {
+  color: var(--dev) !important;
+}
+
+.text-vista {
+  color: var(--vista) !important;
+}
+
+.border-dev {
+  border-color: var(--dev) !important;
+}
+
+.border-vista {
+  border-color: var(--vista) !important;
+}
+
+.shadow-dev {
+  box-shadow: 0 25px 50px -12px rgba(249, 202, 70, 0.2) !important;
+}
+
+.shadow-vista {
+  box-shadow: 0 25px 50px -12px rgba(124, 167, 235, 0.2) !important;
+}
+
+/* Soporte para dark mode con next-themes */
+.dark .dark\:bg-vista {
+  background-color: #7CA7EB !important;
+}
+
+/* AGREGA ESTAS DOS LÍNEAS QUE FALTAN */
+.dark .dark\:text-vista {
+  color: #7CA7EB !important;
+}
+
+.dark .dark\:text-dev {
+  color: #F9CA46 !important;
+}
+
+.dark .dark\:text-white {
+  color: white !important;
+}
+
+.dark .dark\:shadow-vista {
+  box-shadow: 0 25px 50px -12px rgba(124, 167, 235, 0.2) !important;
+}
+
+.dark .dark\:hover\:bg-vista:hover {
+  background-color: #7CA7EB !important;
+}
+
+.dark .dark\:hover\:border-vista:hover {
+  border-color: #7CA7EB !important;
+}
+
+.dark .dark\:hover\:text-white:hover {
+  color: white !important;
+}
+/* Opacidades para efectos de brillo */
+.bg-dev\/20 {
+  background-color: rgba(249, 202, 70, 0.2) !important;
+}
+
+.bg-dev\/10 {
+  background-color: rgba(249, 202, 70, 0.1) !important;
+}
+
+.dark .dark\:bg-vista\/20 {
+  background-color: rgba(124, 167, 235, 0.2) !important;
+}
+
+.dark .dark\:bg-vista\/15 {
+  background-color: rgba(124, 167, 235, 0.15) !important;
 }
