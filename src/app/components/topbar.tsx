@@ -93,7 +93,7 @@ export default function Topbar() {
         className={`fixed left-0 w-full bg-background/98 backdrop-blur-2xl transition-all duration-500 md:hidden border-b border-card-border shadow-2xl ${
           open 
             ? 'top-24 opacity-100 visible h-[calc(100vh-6rem)]' 
-            : 'top-[-100%] opacity-0 invisible h-0'
+            : '-top-full opacity-100 invisible h-0'
         }`}
       >
         <div className="flex flex-col items-center justify-center h-full px-8 pb-20">
