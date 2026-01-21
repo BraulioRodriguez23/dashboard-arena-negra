@@ -25,71 +25,73 @@ export default function ColmenaExperience() {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.2 }
     );
-    document.querySelectorAll('.snap-section').forEach((s) => observer.observe(s));
+    document.querySelectorAll('.scroll-section').forEach((s) => observer.observe(s));
     return () => observer.disconnect();
   }, []);
 
   return (
-    <div className="relative h-screen w-full max-w-full bg-background overflow-hidden selection:bg-dev/30">
+    <div className="relative min-h-screen w-full max-w-full bg-background selection:bg-dev/30">
       
-      {/* INDICADORES */}
-      <div className="fixed right-6 top-1/2 -translate-y-1/2 z-[100] hidden md:flex flex-col gap-4">
+      {/* INDICADORES LATERALES */}
+      <div className="fixed right-4 top-1/2 -translate-y-1/2 z-[100] hidden md:flex flex-col gap-4">
         {EXPERIENCES.map((_, index) => (
           <div key={index} className={`h-1 rounded-full transition-all duration-700 ${activeSection === index ? 'bg-dev dark:bg-vista w-8' : 'bg-muted/20 w-3'}`} />
         ))}
       </div>
 
-      <div className="h-full w-full overflow-y-auto overflow-x-hidden scroll-smooth snap-y snap-mandatory md:snap-none no-scrollbar">
+      <div className="w-full flex flex-col no-scrollbar">
         
         {/* INTRO */}
-        <section data-index="0" className="snap-section snap-start w-full h-screen flex flex-col justify-center items-center text-center px-6">
+        <section data-index="0" className="scroll-section w-full h-screen flex flex-col justify-center items-center text-center px-6 pt-32">
           <div className="max-w-full gpu-accelerated">
-            <h1 className="text-5xl md:text-9xl font-black text-foreground tracking-tighter mb-4 italic uppercase">
+            <h1 className="text-6xl md:text-[9.5rem] font-black text-foreground tracking-tighter mb-4 italic uppercase leading-none">
               Colmena<span className="text-dev dark:text-vista">.</span>
             </h1>
-            <p className="text-muted text-sm md:text-2xl font-medium max-w-prose italic opacity-80">{EXPERIENCES[0].desc}</p>
+            <p className="text-muted text-lg md:text-3xl font-medium max-w-2xl italic opacity-80">{EXPERIENCES[0].desc}</p>
           </div>
         </section>
 
-        {/* MÓDULOS */}
+        {/* MÓDULOS: Ajuste de paddings para móvil */}
         {EXPERIENCES.slice(1).map((item, index) => (
           <section 
-            key={item.id}
-            data-index={index + 1}
-            // ESTÁNDAR: Centrado perfecto con un poco de respiro
-            className="snap-section snap-start w-full h-screen flex flex-col items-center justify-center p-4 md:p-6 overflow-hidden"
+            key={item.id} 
+            data-index={index + 1} 
+            // p-2 en móvil para que la tarjeta use casi todo el ancho de la pantalla
+            className="scroll-section w-full flex flex-col items-center justify-start pt-20 md:pt-40 p-2 md:p-8"
           >
-            {/* CARD: Altura de 80vh para garantizar compatibilidad universal */}
-            <div className="relative w-full h-[80vh] md:h-[85vh] max-w-full md:max-w-7xl flex flex-col rounded-[2.5rem] md:rounded-[3rem] border border-card-border bg-card shadow-2xl overflow-hidden gpu-accelerated">
+            {/* CARD: rounded-[2rem] y w-[96%] para que se vea más cerca del borde en móvil */}
+            <div className="relative w-[96%] md:w-full max-w-full md:max-w-7xl flex flex-col rounded-[2rem] md:rounded-[3rem] border border-card-border bg-card shadow-2xl overflow-hidden gpu-accelerated">
               
-              {/* HEADER */}
-              <div className="shrink-0 w-full h-10 md:h-12 bg-card/95 flex items-center justify-between px-6 border-b border-card-border z-30">
-                <span className="text-muted text-[8px] md:text-[10px] uppercase tracking-[0.4em] font-black italic">Módulo: {item.title}</span>
-                <div className="flex gap-1.5"><div className="w-1.5 h-1.5 rounded-full bg-red-500/20" /><div className="w-1.5 h-1.5 rounded-full bg-yellow-500/20" /><div className="w-1.5 h-1.5 rounded-full bg-green-500/20" /></div>
+              <div className="shrink-0 w-full h-10 md:h-14 bg-card flex items-center justify-between px-6 md:px-8 border-b border-card-border z-30">
+                <span className="text-muted text-[9px] md:text-[12px] uppercase tracking-[0.4em] font-black italic">Módulo: {item.title}</span>
+                <div className="flex gap-1.5 md:gap-2">
+                  <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-red-500/20" />
+                  <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-yellow-500/20" />
+                  <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-green-500/20" />
+                </div>
               </div>
 
-              {/* CONTENIDO */}
-              <div className="grow overflow-y-auto no-scrollbar scroll-smooth">
+              <div className="w-full h-auto">
                 <div className="w-full flex flex-col items-center">
-                  <div className="w-full bg-black/[0.02] flex justify-center">
+                  <div className="w-full flex justify-center bg-black/[0.01]">
                     {item.img && (
                       <img 
                         src={item.img} 
                         alt={item.title} 
+                        // object-top asegura que la interfaz se vea desde arriba sin cortes raros
                         className="w-full h-auto object-contain md:object-cover md:object-top block" 
-                        loading="lazy"
                       />
                     )}
                   </div>
                   
-                  <div className="py-12 md:py-24 w-full flex flex-col items-center justify-center text-center px-8 md:px-10 bg-card border-t border-card-border">
-                    <h2 className="text-foreground text-xl md:text-6xl font-black mb-3 md:mb-4 tracking-tighter italic uppercase">{item.title}</h2>
-                    <p className="text-muted text-[10px] md:text-xl font-medium max-w-2xl leading-relaxed mx-auto opacity-80">{item.desc}</p>
-                    <div className="mt-8 flex flex-col items-center gap-3">
-                      <span className="text-[8px] md:text-[11px] uppercase tracking-[0.5em] font-black text-dev dark:text-vista animate-pulse">Siga bajando</span>
-                      <div className="w-px h-10 md:h-20 bg-gradient-to-b from-dev dark:from-vista to-transparent" />
+                  {/* TEXTO: py-8 en móvil para que sea más compacto */}
+                  <div className="py-8 md:py-32 w-full flex flex-col items-center justify-center text-center px-6 md:px-16 bg-card border-t border-card-border">
+                    <h2 className="text-foreground text-2xl md:text-7xl font-black mb-3 md:mb-6 tracking-tighter italic uppercase">{item.title}</h2>
+                    <p className="text-muted text-[10px] md:text-2xl font-medium max-w-3xl leading-relaxed mx-auto opacity-80">{item.desc}</p>
+                    <div className="mt-8 flex flex-col items-center gap-4">
+                      <div className="w-px h-12 md:h-24 bg-gradient-to-b from-dev dark:from-vista to-transparent" />
                     </div>
                   </div>
                 </div>

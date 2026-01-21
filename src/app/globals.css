@@ -14,16 +14,17 @@
 }
 
 .dark {
-  --background: #272625;      
+  /* NEGRO CARBONO: Unificado para evitar parches visuales */
+  --background: #0D0D0D;      
   --foreground: #F1F0ED;      
-  --card: #1F1E1D;            
-  --card-border: rgba(249, 202, 70, 0.08); 
+  --card: #0D0D0D;            
+  --card-border: rgba(255, 255, 255, 0.08); 
   --muted: #A1A1AA;
 }
 
 @layer base {
   html, body {
-    /* BLOQUEO DE BAILE LATERAL: Asegura estabilidad total */
+    /* BLOQUEO DE BAILE LATERAL: Estabilidad total */
     width: 100%;
     max-width: 100%;
     overflow-x: hidden !important;
@@ -34,7 +35,7 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     
-    background-color: var(--background);
+    background-color: var(--background) !important;
     color: var(--foreground);
   }
 
@@ -46,7 +47,7 @@
 }
 
 @layer utilities {
-  /* ACELERACIÓN GPU: Vital para animaciones fluidas y scroll sin lag */
+  /* ACELERACIÓN GPU: Vital para scroll fluido con imágenes pesadas */
   .gpu-accelerated {
     transform: translateZ(0);
     backface-visibility: hidden;
@@ -61,12 +62,11 @@
   .no-scrollbar {
     -ms-overflow-style: none !important;
     scrollbar-width: none !important;
-    /* Mantiene el contenido estable al ocultar scroll */
     scrollbar-gutter: stable; 
   }
 }
 
-/* 2. CLASES DE MARCA (Compatibilidad con tus componentes) */
+/* 2. CLASES DE MARCA (Compatibilidad total) */
 .bg-dev { background-color: var(--dev) !important; }
 .bg-vista { background-color: var(--vista) !important; }
 .text-dev { color: var(--dev) !important; }
@@ -83,22 +83,22 @@
 .shadow-dev { box-shadow: 0 25px 50px -12px rgba(249, 202, 70, 0.2) !important; }
 .shadow-vista { box-shadow: 0 25px 50px -12px rgba(124, 167, 235, 0.2) !important; }
 
-/* 3. SOPORTE ESPECÍFICO DARK MODE Y VISIBILIDAD */
-
-/* Corrección para botones y elementos en Tema Claro (Light) */
-.topbar-element {
-  background-color: rgba(0, 12, 38, 0.05);
-  color: var(--foreground);
-}
-
+/* 3. SOPORTE ESPECÍFICO DARK MODE Y UNIFORMIDAD */
+.dark .dark\:bg-background { background-color: #0D0D0D !important; }
+.dark .dark\:bg-card { background-color: #0D0D0D !important; }
 .dark .dark\:bg-vista { background-color: var(--vista) !important; }
 .dark .dark\:text-vista { color: var(--vista) !important; }
 .dark .dark\:text-dev { color: var(--dev) !important; }
 .dark .dark\:text-white { color: white !important; }
 .dark .dark\:bg-vista\/20 { background-color: rgba(124, 167, 235, 0.2) !important; }
-.dark .dark\:bg-vista\/15 { background-color: rgba(124, 167, 235, 0.15) !important; }
 .dark .dark\:shadow-vista { box-shadow: 0 25px 50px -12px rgba(124, 167, 235, 0.2) !important; }
+
+/* Corrección para botones en Tema Claro */
+.topbar-element {
+  background-color: rgba(0, 12, 38, 0.05);
+  color: var(--foreground);
+}
 
 /* Hover states para Dark Mode */
 .dark .dark\:hover\:bg-vista:hover { background-color: var(--vista) !important; }
-.dark .dark\:hover\:text-white:hover { color: white !important; } 
+.dark .dark\:hover\:text-white:hover { color: white !important; }
