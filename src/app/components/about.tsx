@@ -38,7 +38,7 @@ export const About = () => {
           {/* Imagen: Proporción 16:10 para un look cinematográfico limpio */}
           <div className="relative w-full h-64 md:h-80 lg:h-96 rounded-[2.5rem] overflow-hidden border border-card-border shadow-2xl transition-all duration-500 hover:border-dev dark:hover:border-vista group">
             <Image
-              src="/AND_Slogan(Ingles).jpg"
+              src="/AND_Slogan(Ingles).webp"
               alt="Slogan Arena Negra"
               fill
               className="object-cover transition-transform duration-1000 group-hover:scale-105"

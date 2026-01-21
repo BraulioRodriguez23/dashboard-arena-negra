@@ -58,7 +58,7 @@ export default function ProductHighlight() {
         <div className="relative group">
           <div className="rounded-[2.5rem] overflow-hidden border border-card-border bg-card shadow-2xl transition-all duration-500 group-hover:border-dev dark:group-hover:border-vista">
             <img
-              src="/Colmena_Miel+Arena.jpg"
+              src="/Colmena_Miel-Arena.webp"
               alt="Preview del SaaS Colmena"
               className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.02]"
             />

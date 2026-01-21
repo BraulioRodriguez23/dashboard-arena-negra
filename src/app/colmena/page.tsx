@@ -49,7 +49,7 @@ export default function ColmenaPage() {
           <div className="order-1 lg:order-2 w-full lg:w-full animate-in fade-in zoom-in-95 duration-1000">
             <div className="relative rounded-none sm:rounded-[2.5rem] bg-card/50 border-y sm:border border-card-border shadow-2xl overflow-hidden aspect-auto md:aspect-square group">
               <img
-                src="/sona_seleccion1.png"
+                src="/sona_seleccion1.webp"
                 alt="Preview Colmena"
                 className="w-full h-auto md:h-full object-contain md:object-cover md:object-top transition-transform duration-700 group-hover:scale-105"
               />
