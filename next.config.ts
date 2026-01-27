@@ -1,27 +1,21 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
   // 1. OPTIMIZACIÓN DE IMÁGENES
   images: {
-    // Permite que Next.js genere versiones AVIF (más ligeras que WebP)
+    // AVIF es un 20% más ligero que WebP, ideal para bajar esos 300KB
     formats: ['image/avif', 'image/webp'],
-    // Define los anchos de pantalla para generar imágenes responsivas automáticamente
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
-    // Calidad de compresión (75 es el punto dulce entre peso y fidelidad)
-    quality: 75,
+    // NOTA: 'quality' se eliminó de aquí en v15. Se usa en el componente <Image />
   },
 
-  // 2. RENDIMIENTO DEL BUNDLE
-  // Minificación agresiva usando SWC (el compilador rápido de Rust)
-  swcMinify: true,
-  
-  // 3. LIMPIEZA DE CÓDIGO EN PRODUCCIÓN
+  // 2. LIMPIEZA DE CÓDIGO
   compiler: {
-    // Elimina console.logs en producción para ahorrar bytes
+    // Mantiene los errores para debug, pero quita logs pesados en producción
     removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
   },
 
-  // 4. SEGURIDAD Y SEO
-  // Forzar que el sitio solo se cargue en marcos del mismo origen (Mitiga Clickjacking)
+  // 3. SEGURIDAD (Mejora las "Best Practices" en Lighthouse)
   async headers() {
     return [
       {
@@ -40,8 +34,10 @@ const nextConfig = {
     ];
   },
 
-  // 5. ESTABILIDAD
+  // 4. ESTABILIDAD
   reactStrictMode: true,
+  
+  // swcMinify ya no es necesario, Next.js 15 lo usa por defecto.
 };
 
 export default nextConfig;

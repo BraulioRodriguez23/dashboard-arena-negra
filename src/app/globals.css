@@ -2,19 +2,21 @@
 
 /* 1. CONFIGURACIÓN DE VARIABLES */
 :root {
+  /* FIX SAFARI: Avisa al navegador el esquema para evitar "lavado" de color */
+  color-scheme: light dark; 
+  
   --background: #F1F0ED;      
   --foreground: #000C26;      
   --muted: #4A5568;
   --card: #FFFFFF;
   --card-border: rgba(0, 12, 38, 0.08);
   
-  /* Colores de marca */
+  /* Colores de marca exactos */
   --dev: #F9CA46;
   --vista: #7CA7EB;
 }
 
 .dark {
-  /* NEGRO CARBONO: Unificado para evitar parches visuales */
   --background: #0D0D0D;      
   --foreground: #F1F0ED;      
   --card: #0D0D0D;            
@@ -24,7 +26,6 @@
 
 @layer base {
   html, body {
-    /* BLOQUEO DE BAILE LATERAL: Estabilidad total */
     width: 100%;
     max-width: 100%;
     overflow-x: hidden !important;
@@ -37,6 +38,9 @@
     
     background-color: var(--background) !important;
     color: var(--foreground);
+
+    /* FIX SAFARI: Evita que el fondo desaparezca en scroll */
+    -webkit-overflow-scrolling: touch;
   }
 
   body {
@@ -47,15 +51,17 @@
 }
 
 @layer utilities {
-  /* ACELERACIÓN GPU: Vital para scroll fluido con imágenes pesadas */
   .gpu-accelerated {
     transform: translateZ(0);
+    -webkit-transform: translateZ(0); /* Prefijo para Safari */
     backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
     perspective: 1000px;
     will-change: transform;
+    /* FIX SAFARI: Mantiene la integridad del color en capas GPU */
+    isolation: isolate; 
   }
 
-  /* NO SCROLLBAR + ESTABILIDAD VISUAL */
   .no-scrollbar::-webkit-scrollbar {
     display: none !important;
   }
@@ -66,7 +72,7 @@
   }
 }
 
-/* 2. CLASES DE MARCA (Compatibilidad total) */
+/* 2. CLASES DE MARCA (Tus colores originales con fix de renderizado) */
 .bg-dev { background-color: var(--dev) !important; }
 .bg-vista { background-color: var(--vista) !important; }
 .text-dev { color: var(--dev) !important; }
@@ -74,7 +80,7 @@
 .border-dev { border-color: var(--dev) !important; }
 .border-vista { border-color: var(--vista) !important; }
 
-/* Efectos de Brillo (Glow) */
+/* Efectos de Brillo (Glow) - Manteniendo tus RGBA */
 .bg-dev\/20 { background-color: rgba(249, 202, 70, 0.2) !important; }
 .bg-dev\/10 { background-color: rgba(249, 202, 70, 0.1) !important; }
 .bg-vista\/20 { background-color: rgba(124, 167, 235, 0.2) !important; }
@@ -83,7 +89,7 @@
 .shadow-dev { box-shadow: 0 25px 50px -12px rgba(249, 202, 70, 0.2) !important; }
 .shadow-vista { box-shadow: 0 25px 50px -12px rgba(124, 167, 235, 0.2) !important; }
 
-/* 3. SOPORTE ESPECÍFICO DARK MODE Y UNIFORMIDAD */
+/* 3. SOPORTE ESPECÍFICO DARK MODE */
 .dark .dark\:bg-background { background-color: #0D0D0D !important; }
 .dark .dark\:bg-card { background-color: #0D0D0D !important; }
 .dark .dark\:bg-vista { background-color: var(--vista) !important; }
@@ -93,12 +99,10 @@
 .dark .dark\:bg-vista\/20 { background-color: rgba(124, 167, 235, 0.2) !important; }
 .dark .dark\:shadow-vista { box-shadow: 0 25px 50px -12px rgba(124, 167, 235, 0.2) !important; }
 
-/* Corrección para botones en Tema Claro */
 .topbar-element {
   background-color: rgba(0, 12, 38, 0.05);
   color: var(--foreground);
 }
 
-/* Hover states para Dark Mode */
 .dark .dark\:hover\:bg-vista:hover { background-color: var(--vista) !important; }
 .dark .dark\:hover\:text-white:hover { color: white !important; }
