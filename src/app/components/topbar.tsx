@@ -14,7 +14,6 @@ export default function Topbar() {
   useEffect(() => {
     setMounted(true);
     const handleScroll = () => {
-      // Umbral de scroll para la transición
       const isScrolled = window.scrollY > 20;
       setScrolled(isScrolled);
     };
@@ -22,7 +21,6 @@ export default function Topbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Bloqueo de scroll cuando el menú está abierto
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : 'unset';
     return () => { document.body.style.overflow = 'unset'; };
@@ -35,6 +33,8 @@ export default function Topbar() {
   return (
     <>
       <nav 
+        // CAMBIO: Se añade un aria-label para identificar la navegación principal
+        aria-label="Navegación principal"
         className={`fixed top-0 left-0 w-full z-[110] transition-all duration-500 ease-in-out ${
           scrolled 
             ? "bg-background/80 backdrop-blur-xl border-b border-card-border shadow-sm" 
@@ -42,23 +42,23 @@ export default function Topbar() {
         }`}
         style={{ transform: 'translateZ(0)' }} 
       >
-        {/* ALTURA DEL CONTENEDOR: 
-            Aumentamos a h-24 (96px) para que el logo tenga espacio real de respiración.
-            Al scrollear baja a h-20 (80px).
-        */}
         <div className={`max-w-7xl mx-auto px-6 flex items-center justify-between transition-all duration-500 ${
           scrolled ? "h-20" : "h-24 md:h-28"
         }`}>
           
-          {/* LOGO: Ahora con h-16/h-20 reales */}
           <Link href="/" className="flex items-center z-[120]" onClick={() => setOpen(false)}>
             {mounted ? (
               <img
                 src={logoSrc}
-                alt="Arena Negra"
+                alt="Arena Negra - Agencia de Desarrollo"
+                // CAMBIO: Dimensiones explícitas para evitar el CLS (salto de diseño)
+                width={200}
+                height={80}
                 className={`w-auto object-contain transition-all duration-500 hover:scale-105 will-change-transform ${
                   scrolled ? "h-12 md:h-16" : "h-16 md:h-20"
                 }`}
+                // CAMBIO: fetchPriority para acelerar el renderizado del logo
+                fetchPriority="high"
               />
             ) : (
               <div className="h-16 w-40" />
@@ -88,6 +88,9 @@ export default function Topbar() {
             <button 
               className="p-2 text-foreground focus:outline-none" 
               onClick={() => setOpen(!open)}
+              // CAMBIO: aria-label dinámico para accesibilidad del botón de menú
+              aria-label={open ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
+              aria-expanded={open}
             >
               <div className="space-y-2 w-7">
                 <span className={`block h-0.5 bg-current transition-all duration-300 ${open ? 'rotate-45 translate-y-2.5' : ''}`}></span>
@@ -99,8 +102,11 @@ export default function Topbar() {
         </div>
       </nav>
 
-      {/* MENU MÓVIL (Mismo código anterior) */}
-      <div className={`fixed inset-0 w-full h-screen bg-background/98 backdrop-blur-3xl md:hidden z-[105] transition-all duration-500 ease-in-out ${open ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-full'}`}>
+      {/* MENU MÓVIL */}
+      <div 
+        // CAMBIO: aria-hidden para que los lectores de pantalla ignoren el menú cuando está cerrado
+        aria-hidden={!open}
+        className={`fixed inset-0 w-full h-screen bg-background/98 backdrop-blur-3xl md:hidden z-[105] transition-all duration-500 ease-in-out ${open ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-full'}`}>
         <div className="flex flex-col items-center justify-center h-full px-8 pt-20">
           <div className="flex flex-col items-center space-y-12 w-full max-w-[300px]">
             <Link href="/" onClick={() => setOpen(false)} className="text-3xl font-black tracking-[0.5em] text-foreground">HOME</Link>

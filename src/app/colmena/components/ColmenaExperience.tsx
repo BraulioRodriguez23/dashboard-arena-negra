@@ -34,12 +34,21 @@ export default function ColmenaExperience() {
   return (
     <div className="relative min-h-screen w-full max-w-full bg-background selection:bg-dev/30">
       
-      {/* INDICADORES LATERALES */}
-      <div className="fixed right-4 top-1/2 -translate-y-1/2 z-[100] hidden md:flex flex-col gap-4">
+      {/* INDICADORES LATERALES: Añadimos etiquetas para accesibilidad */}
+      <nav 
+        aria-label="Progreso de módulos"
+        className="fixed right-4 top-1/2 -translate-y-1/2 z-[100] hidden md:flex flex-col gap-4"
+      >
         {EXPERIENCES.map((_, index) => (
-          <div key={index} className={`h-1 rounded-full transition-all duration-700 ${activeSection === index ? 'bg-dev dark:bg-vista w-8' : 'bg-muted/20 w-3'}`} />
+          <div 
+            key={index} 
+            role="presentation"
+            className={`h-1 rounded-full transition-all duration-700 ${
+              activeSection === index ? 'bg-dev dark:bg-vista w-8' : 'bg-muted/20 w-3'
+            }`} 
+          />
         ))}
-      </div>
+      </nav>
 
       <div className="w-full flex flex-col no-scrollbar">
         
@@ -53,15 +62,13 @@ export default function ColmenaExperience() {
           </div>
         </section>
 
-        {/* MÓDULOS: Ajuste de paddings para móvil */}
+        {/* MÓDULOS */}
         {EXPERIENCES.slice(1).map((item, index) => (
           <section 
             key={item.id} 
             data-index={index + 1} 
-            // p-2 en móvil para que la tarjeta use casi todo el ancho de la pantalla
             className="scroll-section w-full flex flex-col items-center justify-start pt-20 md:pt-40 p-2 md:p-8"
           >
-            {/* CARD: rounded-[2rem] y w-[96%] para que se vea más cerca del borde en móvil */}
             <div className="relative w-[96%] md:w-full max-w-full md:max-w-7xl flex flex-col rounded-[2rem] md:rounded-[3rem] border border-card-border bg-card shadow-2xl overflow-hidden gpu-accelerated">
               
               <div className="shrink-0 w-full h-10 md:h-14 bg-card flex items-center justify-between px-6 md:px-8 border-b border-card-border z-30">
@@ -79,14 +86,16 @@ export default function ColmenaExperience() {
                     {item.img && (
                       <img 
                         src={item.img} 
-                        alt={item.title} 
-                        // object-top asegura que la interfaz se vea desde arriba sin cortes raros
+                        alt={`Captura de pantalla del ${item.title}`} 
+                        // CAMBIO: Dimensiones explícitas para eliminar el CLS del reporte
+                        width={1200}
+                        height={800}
                         className="w-full h-auto object-contain md:object-cover md:object-top block" 
+                        loading="lazy"
                       />
                     )}
                   </div>
                   
-                  {/* TEXTO: py-8 en móvil para que sea más compacto */}
                   <div className="py-8 md:py-32 w-full flex flex-col items-center justify-center text-center px-6 md:px-16 bg-card border-t border-card-border">
                     <h2 className="text-foreground text-2xl md:text-7xl font-black mb-3 md:mb-6 tracking-tighter italic uppercase">{item.title}</h2>
                     <p className="text-muted text-[10px] md:text-2xl font-medium max-w-3xl leading-relaxed mx-auto opacity-80">{item.desc}</p>
